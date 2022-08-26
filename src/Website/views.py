@@ -33,25 +33,25 @@ class MatchsAVenirViewSet(viewsets.ModelViewSet):
 def index(request):
     today_j3_matchs = MatchsAVenir.objects.filter(Q(date=today) | Q(date=tomorrow) | Q(date=j2))
     context = {"matchs": today_j3_matchs, "logo": LOGO_LIST}
-    return render(request, "blog/index.html", context=context)
+    return render(request, "Website/index.html", context=context)
 
 
 def today_matchs(request):
     today_matchs = MatchsAVenir.objects.filter(date=today)
     context = {"matchs": today_matchs, "logo": LOGO_LIST}
-    return render(request, "blog/index.html", context=context)
+    return render(request, "Website/index.html", context=context)
 
 
 def tomorrow_matchs(request):
     tomorrow_matchs = MatchsAVenir.objects.filter(date=tomorrow)
     context = {"matchs": tomorrow_matchs, "logo": LOGO_LIST}
-    return render(request, "blog/index.html", context=context)
+    return render(request, "Website/index.html", context=context)
 
 
 def j2_matchs(request):
     j2_matchs = MatchsAVenir.objects.filter(date=j2)
     context = {"matchs": j2_matchs, "logo": LOGO_LIST}
-    return render(request, "blog/index.html", context=context)
+    return render(request, "Website/index.html", context=context)
 
 
 def match_details(request, slug):
@@ -119,7 +119,7 @@ def match_details(request, slug):
                     if team8 == away_team:
                         away_team_corners_against_average = average_corner8
 
-    return render(request, "blog/match_details.html", context={"home_team": home_team,
+    return render(request, "Website/match_details.html", context={"home_team": home_team,
                                                                "away_team": away_team,
                                                                "target_match": target_match,
                                                                "home_team_cards_for_average": home_team_cards_for_average,
