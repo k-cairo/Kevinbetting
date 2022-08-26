@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create an account</title>
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    {% for message in errors.values %}
+    <h3 style="color: red;">
+        {{ message }}
+    </h3>
+    {% endfor %}
+
+    <input type="submit" value="Signup">
+</form>
+</body>
+</html>

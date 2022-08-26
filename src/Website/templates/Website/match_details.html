@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load Website_extras %}
+
+
+{% block content %}
+<!--MATCH INFORMATION'S-->
+<h1 style="text-align: center;">{{ target_match.championship|transformchampionship }}</h1>
+<h1 style="text-align: center;">{{ target_match.date }}</h1>
+<h1 style="text-align: center;">{{ target_match }}</h1>
+
+<hr style="width: 50%; margin: 30 auto; border: 1.5px solid;">
+
+<!--DATA CARDS TABLE-->
+<div style="display: table; margin: auto">
+    <h1 style="text-align: center;">Cards Stats </h1>
+
+    <table class="table w-auto text-center">
+        <thead>
+        <tr>
+            <th></th>
+            <th scope="col">{{ target_match.home_team }}</th>
+            <th scope="col">{{ target_match.away_team }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Average Cards For</td>
+            <td>{{ home_team_cards_for_average }}</td>
+            <td>{{ away_team_cards_for_average }}</td>
+        </tr>
+        <tr>
+            <td>Average Cards Against</td>
+            <td>{{ home_team_cards_against_average }}</td>
+            <td>{{ away_team_cards_against_average }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+        <h1 style="text-align: center;">Corners Stats </h1>
+
+    <table class="table w-auto text-center">
+        <thead>
+        <tr>
+            <th></th>
+            <th scope="col">{{ target_match.home_team }}</th>
+            <th scope="col">{{ target_match.away_team }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Average Corners For</td>
+            <td>{{ home_team_corners_for_average }}</td>
+            <td>{{ away_team_corners_for_average }}</td>
+        </tr>
+        <tr>
+            <td>Average Corners Against</td>
+            <td>{{ home_team_corners_against_average }}</td>
+            <td>{{ away_team_corners_against_average }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
