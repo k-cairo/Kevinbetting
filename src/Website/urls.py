@@ -9,11 +9,11 @@ router.register('datas', DataViewSet)
 router.register('iframes', IframeViewSet)
 
 urlpatterns = [
-    path('', index, name="blog-index"),
-    path('soccer-bet/', today_matchs, name="blog-today_matchs"),
-    path('soccer-bet/tomorrow', tomorrow_matchs, name="blog-tomorrow_matchs"),
-    path('soccer-bet/after-tomorrow', j2_matchs, name="blog-j2_matchs"),
-    path("match-details/<str:slug>/", match_details, name="blog-match_details"),
+    path('', index, name="Website-index"),
+    path('soccer-bet/', today_matchs, name="Website-today_matchs"),
+    path('soccer-bet/tomorrow', tomorrow_matchs, name="Website-tomorrow_matchs"),
+    path('soccer-bet/after-tomorrow', j2_matchs, name="Website-j2_matchs"),
+    path("match-details/<str:slug>/", match_details, name="Website-match_details"),
     path('api/', include(router.urls)),
     path("dj-rest-auth/", include('dj_rest_auth.urls'))
 ]
