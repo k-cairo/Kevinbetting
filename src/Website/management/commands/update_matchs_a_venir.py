@@ -137,7 +137,18 @@ def format_teams_names(team: str) -> str:
         .replace("Vejle-Kolding", "Vejle").replace("Ferreira", "Pacos Ferreira") \
         .replace("Quevilly Rouen-Rouen", "Quevilly Rouen").replace("Ceará", "Ceara").replace("Real Bétis", "Betis") \
         .replace("Philadelphie Union", "Philadelphia Union").replace("Valence", "Valencia") \
-        .replace("Melbourne Heart", "Melbourne City")
+        .replace("Melbourne Heart", "Melbourne City").replace('Rotherham Utd', 'Rotherham')\
+        .replace('Wigan Athletic', 'Wigan').replace("Jong Alkmaar", 'Jong AZ').replace('Miedź Legnica', 'Legnica')\
+        .replace('MKS Korona Kielce', 'Korona').replace('Varaždin', 'Varazdin')\
+        .replace('Austria Lustenau', 'A. Lustenau').replace('Ümraniyespor', 'Umraniyespor')\
+        .replace('Istanbulspor AS', 'Istanbulspor').replace('1. FC Kaiserslautern', 'Kaiserslautern')\
+        .replace('Magdebourg', 'Magdeburg').replace('Zulte-Waregem', 'Waregem')\
+        .replace('Cercle Bruges', 'Cercle Brugge').replace('Zbrojovka Brno', 'Brno')\
+        .replace('Kilmarnock FC', 'Kilmarnock').replace('Eintracht Brunswick', 'Braunschweig')\
+        .replace('OH Louvain', 'Leuven').replace('AS Eupen', "Eupen").replace('RFC Seraing', 'Seraing')\
+        .replace('Courtrai', 'Kortrijk').replace("KS Widzew Lódz", "Widzew Lodz")\
+        .replace("MKE Ankaragücü", 'Ankaragucu').replace('Saint-Trond', 'St. Truiden')\
+        .replace('Standard de Liège', 'St. Liege')
 
 
 def get_cards_queryset(championship: str) -> (dict[str:[list[dict[str:str]]]], dict[str:[list[dict[str:str]]]]):
