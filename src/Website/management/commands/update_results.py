@@ -80,11 +80,11 @@ class Command(BaseCommand):
     help = "Scrape Yesterday's matchs, Get corners and cards data and save it in database"
 
     def handle(self, *args, **options):
-        all_matchs = get_yesterday_all_matchs(date="26-09-2022")
+        all_matchs = get_yesterday_all_matchs(date=yesterday)
 
         for championship, rencontres in all_matchs.items():
             for rencontre in rencontres:
-                target_match = MatchsAVenir.objects.filter(match=rencontre[0].replace('|', ' - '), date="26-09-2022")
+                target_match = MatchsAVenir.objects.filter(match=rencontre[0].replace('|', ' - '), date=yesterday)
                 if target_match:
                     stats = get_matchs_stats(url=rencontre[1])
                     card_bet = float(target_match.get().card_bet.strip("+ "))
