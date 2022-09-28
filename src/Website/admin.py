@@ -4,7 +4,9 @@ from .models import MatchsAVenir, Iframe, Data
 
 @admin.register(MatchsAVenir)
 class MatchAVenir(admin.ModelAdmin):
-    list_display = ("date", "match", "championship", "card_bet", "corner_bet")
+    list_display = (
+        "date", "match", "championship", "card_bet", "corner_bet", "real_cards", "real_corners", "card_bet_passed",
+        "corner_bet_passed")
     list_filter = ("date", "championship", "card_bet")
     search_fields = ("championship", "home_team", "away_team")
 

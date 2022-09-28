@@ -19,8 +19,10 @@ class MatchsAVenir(models.Model):
     away_team_corners_against_average = models.FloatField()
     card_bet = models.CharField(max_length=10)
     corner_bet = models.CharField(max_length=10)
-    real_corners = models.IntegerField(blank=True)
-    real_cards = models.IntegerField(blank=True)
+    real_corners = models.IntegerField(blank=True, null=True)
+    real_cards = models.IntegerField(blank=True, null=True)
+    card_bet_passed = models.BooleanField(null=True)
+    corner_bet_passed = models.BooleanField(null=True)
 
     def __str__(self):
         return self.match.replace("|", " - ")

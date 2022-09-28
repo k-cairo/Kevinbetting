@@ -1,12 +1,10 @@
 from django.core.management.base import BaseCommand
-from datetime import date
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-from slugify import slugify
 from Website.management.commands.update_matchs_a_venir import format_championships_names, format_teams_names
-from utils.constant import day_list, LIST_CHAMPIONSHIP, CONVERSION_LIST, yesterday
+from utils.constant import LIST_CHAMPIONSHIP, yesterday
 from utils.selenium_functions import open_browser, accept_cookie
-from Website.models import MatchsAVenir, Data
+from Website.models import MatchsAVenir
 
 
 def get_yesterday_all_matchs(date: str) -> dict[str: list[str]]:
@@ -54,6 +52,7 @@ def get_matchs_stats(url):
 
     table_match_statictics = driver.find_element(By.CSS_SELECTOR, 'div.MEDpanelstats table')
     table_raws = table_match_statictics.find_elements(By.CSS_SELECTOR, 'tr')
+
     for table_raw in table_raws:
         table_datas = table_raw.find_elements(By.CSS_SELECTOR, 'td')
         if table_datas[2].text == "Corners":
@@ -81,13 +80,29 @@ class Command(BaseCommand):
     help = "Scrape Yesterday's matchs, Get corners and cards data and save it in database"
 
     def handle(self, *args, **options):
-        all_matchs = get_yesterday_all_matchs(date=yesterday)
+        all_matchs = get_yesterday_all_matchs(date="26-09-2022")
 
         for championship, rencontres in all_matchs.items():
             for rencontre in rencontres:
-                if MatchsAVenir.objects.filter(match=rencontre[0].replace('|', ' - '), date=yesterday):
+                target_match = MatchsAVenir.objects.filter(match=rencontre[0].replace('|', ' - '), date="26-09-2022")
+                if target_match:
                     stats = get_matchs_stats(url=rencontre[1])
+                    card_bet = float(target_match.get().card_bet.strip("+ "))
+                    corner_bet = float(target_match.get().corner_bet.strip("+ "))
+
+                    if stats["Corners"] > corner_bet:
+                        corner_bet_passed = True
+                    else:
+                        corner_bet_passed = False
+
+                    if stats["Cards"] > card_bet:
+                        card_bet_passed = True
+                    else:
+                        card_bet_passed = False
+
                     print(f"{rencontre[0].replace('|', ' - ')} | Corners: {stats['Corners']} | Cards: {stats['Cards']}")
-                    MatchsAVenir.objects.filter(match=rencontre[0].replace('|', ' - '), date=yesterday).update(
-                        real_corners=stats["Corners"], real_cards=stats["Cards"])
+
+                    target_match.update(real_corners=stats["Corners"], real_cards=stats["Cards"],
+                                        card_bet_passed=card_bet_passed, corner_bet_passed=corner_bet_passed)
+
         self.stdout.write("Yesterday's matchs datas updated")
